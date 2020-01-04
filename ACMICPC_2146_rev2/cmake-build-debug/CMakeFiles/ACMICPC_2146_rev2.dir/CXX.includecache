@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/son-wonhui/OneDrive - inu.ac.kr/CLionProjects/ACMICPC_2146_rev2/main.cpp
+iostream
+-
+queue
+-
+vector
+-
+iomanip
+-
+algorithm
+-
+
