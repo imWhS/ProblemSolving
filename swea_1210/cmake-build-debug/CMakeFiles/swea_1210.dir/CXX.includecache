@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/son-wonhui/OneDrive - inu.ac.kr/Developments/ProblemSolving/swea_1210/main.cpp
+iostream
+-
+algorithm
+-
+vector
+-
+
