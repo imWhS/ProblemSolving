@@ -11,65 +11,79 @@
  */
 
 #include <iostream>
+#include <vector>
+#include <cmath>
 
 using namespace std;
 
 int N, M;
 char failure[10];
-bool avail[12]; //[0] - [9]: 0 - 9, [10]: -, [11]: +
+bool avail[10]; //[0] - [9]: 0 - 9
 int init = 100;
 int touch_cnt;
+int N_cnt;
 
-void solution() {
-    int divider = 1000000;
+vector<int> nums;
+int minimum = 999999999;
+int minimum_nums;
+int minimum_res = 999999999;
 
-    //자리수 별 리모컨 번호 사용 가능 여부 확인
-    while(divider > 0) {
-        divider /= 10;
-        if(N < divider) continue;
-        int current = N / divider;
-        N %= divider;
-
-        //리모컨에서 해당 자릿수의 숫자를 바로 사용 가능한 경우
-        if(avail[current]) {
-            touch_cnt++;
-        } else {
-            //해당 자릿수의 숫자를 바로 사용 불가능한 경우
-            cout << current << " is UNavailable" << endl;
-
-            //해당 자릿수와 가장 인접한 사용 가능한 숫자 탐색: 상 -> 하 순서
-            int offset = 1;
-            int nb = 0;
-            while(current + offset < 10) {
-                if(avail[current + offset]) {
-                    nb = current + offset;
-                    break;
-                }
-                else offset++;
-            }
-            offset = 1;
-            while(current - offset >= 0) {
-                if(avail[current - offset] && current - offset < nb) {
-                    nb = current - offset;
-                    break;
-                }
-                else offset++;
-            }
-
-            //+, - 버튼만 사용 가능한 경우
-            if(!nb) {
-                cout << "nearby value is unavailable" << endl;
-
-            }
-            else {
-                cout << "nearby value is " << nb << endl;
-
-            }
-
-            int tmp; cin >> tmp;
+int permutation(int depth) {
+    if(depth == N_cnt) {
+        //자릿수 결합
+        bool is_first = false;
+        int perm_result = 0;
+        int alpha = 0;
+        for(int i = 0; i < nums.size(); i++) {
+            if(nums[i] != 0) is_first = true;
+            if(is_first) {
+                perm_result += (nums[i] * pow(10, (nums.size() - i) - 1));
+                alpha++;
+            } else if(!is_first && nums[i] == 0) continue;
         }
+
+        //사용 가능한 numpad를 이용했을 때 최소 touch_cnt 값 탐색
+        if(minimum > abs(perm_result - N)) {
+            minimum = abs(perm_result - N);
+            minimum_nums = perm_result;
+        }
+
+        touch_cnt = abs(N - minimum_nums);
+        //cout << "touch_cnt = " << touch_cnt << endl;
+        return touch_cnt + alpha;
     }
 
+    for(int i = 0; i < 10; i++) {
+        if(!avail[i]) continue;
+        nums.push_back(i);
+        int tmp_result = permutation(depth + 1);
+        if(minimum_res > tmp_result) minimum_res = tmp_result;
+        nums.pop_back();
+    }
+
+    return minimum_res;
+}
+
+void solution() {
+    //N 값의 자리수 계산
+    int N_tmp = N;
+    while(1){
+        N_cnt++;
+        if(N_tmp / 10 != 0) N_tmp /= 10;
+        else break;
+    }
+
+    if(M == 0) touch_cnt = N_cnt;
+    else touch_cnt = permutation(0);
+    //cout << "1st value of touch_cnt: " << touch_cnt << endl;
+
+    //up, down 버튼만 이용했을 때 touch_cnt 값 계산
+    int ud_result = abs(init - N);
+    if(touch_cnt > ud_result) touch_cnt = ud_result;
+    //cout << "2nd value of touch_cnt: " << touch_cnt << endl;
+
+    //int tmp; cin >> tmp;
+    cout << touch_cnt << endl;
 }
 
 int main() {
@@ -77,15 +91,14 @@ int main() {
     cin >> M;
     char input;
 
-    for(int a = 0; a < 12; a++) avail[a] = true;
+    if(M != 0) {
+        for (int a = 0; a < 12; a++) avail[a] = true;
 
-    for(int m = 0; m < M; m++) {
-        cin >> input;
-        if(input == '-') avail[10] = true;
-        else if(input == '+') avail[11] = true;
-        else avail[input - '0'] = false;
+        for (int m = 0; m < M; m++) {
+            cin >> input;
+            avail[input - '0'] = false;
+        }
     }
-
     solution();
     return 0;
 }
