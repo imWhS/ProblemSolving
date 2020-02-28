@@ -29,7 +29,6 @@
 
 using namespace std;
 
-
 int N, M;
 int r, c, d;
 int map[51][51];

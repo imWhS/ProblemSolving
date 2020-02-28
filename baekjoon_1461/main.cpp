@@ -19,6 +19,9 @@
 /*  [0]     [1]     [2]     [3]     [4]     [5]     [6]     [7]
     -39     -37     -29     -28     -6      <- 0 -> 2       11
     M = 2
+
+    왼쪽부터 이동 시: 39 걸음부터 시작
+    오른쪽부터 이동 시: 11 걸음부터 시작
  */
 
 #include <iostream>
@@ -28,18 +31,12 @@
 using namespace std;
 
 int N, M;
-int book[10001];
-vector<int> book2;
+vector<int> book;
 int cnt_walking;
-int cnt_holding;
 
 void solution() {
-    if(abs(book2.front()) > abs(book2.back())) {
-        cnt_walking += abs(book2.front());
-        int end = book2.front();
-        for(int i = end - M; i >= 0; i--) {
+    if(abs(book.front()) > abs(book.back())) {
 
-        }
     }
 }
 
@@ -48,13 +45,9 @@ int main() {
     int input;
     for(int n = 1; n <= N; n++) {
         cin >> input;
-        book2.push_back(input);
+        book.push_back(input);
     }
-    for(int n = 0; n < book2.size(); n++) cout << book2[n] << ' ';
-    cout << endl;
-    sort(book2.begin(), book2.end());
-    for(int n = 0; n < book2.size(); n++) cout << book2[n] << ' ';
-    cout << endl;
+    sort(book.begin(), book.end());
 
     solution();
     return 0;
