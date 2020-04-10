@@ -73,6 +73,9 @@
       </split-second>
     </splitter>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -81,11 +84,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
-    <option name="width" value="1501" />
-    <option name="height" value="1010" />
-  </component>
+  <component name="ProjectId" id="1aFTmbFe4PLgEsirNnU7vG64arG" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />

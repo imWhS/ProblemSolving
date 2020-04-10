@@ -27,60 +27,6 @@
 
 using namespace std;
 
-class point {
-public:
-    int r, c;
-
-    point(int r, int c) : r(r), c(c) {};
-    point();
-};
-
-class item {
-public:
-    int r, c, size;
-
-    item(int r, int c, int size) : r(r), c(c), size(size) {};
-    item();
-};
-
-int N;
-int map[21][21];
-
-item shark;
-int visited[21][21];
-
-//UP DOWN LEFT RIGHT
-int di[4] = { -1, 1, 0, 0 };
-int dj[4] = { 0, 0, -1, 1 };
-
-void solution() {
-    queue<point> Q;
-    point first(shark.r, shark.c);
-    Q.push(first);
-    visited[shark.r][shark.c] = true;
-    int second = 0;
-
-    while(!Q.empty()) {
-        int Q_leng = Q.size();
-
-        while(Q_leng--) {
-            point current = Q.front();
-            Q.pop();
-
-            for(int d = 0; d < 4; d++) {
-                point next(current.r + di[d], current.c + dj[d]);
-                if(next.r < 1 || next.c < 1 || next.r > N || next.c > N) continue;
-
-            }
-        }
-
-        second++;
-    }
-
-
-}
-
-
 int main() {
     cin >> N;
     for(int i = 1; i <= N; i++) for(int j = 1; j<= N; j++) {
