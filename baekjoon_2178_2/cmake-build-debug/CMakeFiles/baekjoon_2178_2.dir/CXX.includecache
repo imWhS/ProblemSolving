@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/son-wonhui/Developments/ProblemSolving/baekjoon_2178_2/main.cpp
+iostream
+-
+utility
+-
+queue
+-
+

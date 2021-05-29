@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/son-wonhui/OneDrive - inu.ac.kr/Developments/ProblemSolving/baekjoon_16235_ref1/main.cpp
+iostream
+-
+deque
+-
+

@@ -53,6 +53,7 @@ int currentStickerMinR = 99999, currentStickerMinC = 99999;
 
 bool visitedMap[41][41];
 bool rotated = false;
+bool attached = false;
 
 int areas;
 vector<point> tmpStickerPoints;
@@ -140,15 +141,14 @@ bool isAttachable(int rStart, int cStart) {
 }
 
 void DFS(int r, int c) {
-    cout << "DFS(" << r << ", " << c << ")" << endl;
+    //cout << "DFS(" << r << ", " << c << ")" << endl;
     //Terminate conditions
     if(r > N || c > M) return;
 
     visitedMap[r][c] = true;
 
     if(isAttachable(r, c)) {
-        cout << " (" << r << ", " << c << ")에 부착 가능합니다." << endl;
-        attached = true;
+        //cout << " (" << r << ", " << c << ")에 부착 가능합니다." << endl;
 
         //1순위: r 값이 더 적은가?
         //2순위: r 값이 같다면, c 값이 더 적은가?
@@ -165,6 +165,8 @@ void DFS(int r, int c) {
                         tmpStickerPoints.push_back(tmp);
                         cout << " pushed: (" << rNotebook << ", " << cNotebook << ") " << endl;
                     }
+
+                    attached = true;
                 }
         } else {
             cout << " 하지만 최상단/우측 위치가 아니어서 반영되지 않았습니다. " << endl;
@@ -188,39 +190,45 @@ void attachAllStickers() {
     cout << "\nsticker(tmpStickerPoints.size(): " << tmpStickerPoints.size() << ")" << endl;
     //다른 스티커/노트북과 안 겹치게 붙일 수 있는 위치 탐색
     DFS(1, 1);
-    //if(attached) return;
-    attached = false;
+    if(attached) return;
     resetVisitedMap();
 
     cout << "\n회전1 후의 sticker(tmpStickerPoints.size(): " << tmpStickerPoints.size() << ")" << endl;
     reverse();
-    printCurrentSticker();
-    printCurrentNotebook();
-    //다른 스티커/노트북과 안 겹치게 붙일 수 있는 위치 탐색
-    DFS(1, 1);
-    cout << endl;
-    //if(attached) return;
-    attached = false;
-    resetVisitedMap();
-
-    cout << "\n회전2 후의 sticker(tmpStickerPoints.size(): " << tmpStickerPoints.size() << ")" << endl;
     rotate(1);
     printCurrentSticker();
     printCurrentNotebook();
     //다른 스티커/노트북과 안 겹치게 붙일 수 있는 위치 탐색
     DFS(1, 1);
-    //if(attached) return;
-    attached = false;
+    cout << endl;
+    if(attached) return;
     resetVisitedMap();
 
-    cout << "\n회전3 후의 sticker(tmpStickerPoints.size(): " << tmpStickerPoints.size() << ")" << endl;
+    /*
+     5 4 1
+2 5
+1 1 1 1 1
+0 0 0 1 0
+     */
+
+    cout << "\n회전2 후의 sticker(tmpStickerPoints.size(): " << tmpStickerPoints.size() << ")" << endl;
+    rotate(1);
     reverse();
     printCurrentSticker();
     printCurrentNotebook();
     //다른 스티커/노트북과 안 겹치게 붙일 수 있는 위치 탐색
     DFS(1, 1);
-    //if(attached) return;
-    attached = false;
+    if(attached) return;
+    resetVisitedMap();
+
+    cout << "\n회전3 후의 sticker(tmpStickerPoints.size(): " << tmpStickerPoints.size() << ")" << endl;
+    reverse();
+    rotate(1);
+    printCurrentSticker();
+    printCurrentNotebook();
+    //다른 스티커/노트북과 안 겹치게 붙일 수 있는 위치 탐색
+    DFS(1, 1);
+    if(attached) return;
     resetVisitedMap();
 
     cout << endl;

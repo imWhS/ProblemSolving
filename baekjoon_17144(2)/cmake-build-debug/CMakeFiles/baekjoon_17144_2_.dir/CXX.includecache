@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/son-wonhui/OneDrive - inu.ac.kr/Developments/ProblemSolving/baekjoon_17144(2)/main.cpp
+iostream
+-
+vector
+-
+iomanip
+-
+queue
+-
+deque
+-
+
